@@ -7,10 +7,13 @@
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.5" />
     <PackageReference Include="MvvmLight" Version="5.4.1.1" />
+    <PackageReference Include="NAudio" Version="1.10.0" />
+    <PackageReference Include="NAudio.Vorbis" Version="1.2.0" />
+    <PackageReference Include="Nvorbis" Version="0.10.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../DCSB.Utils/DCSB.Utils.csproj" />
+    <ProjectReference Include="../DCSB.Models/DCSB.Models.csproj" />
   </ItemGroup>
 
 </Project>
