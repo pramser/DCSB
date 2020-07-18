@@ -4,7 +4,6 @@ namespace DCSB.SoundPlayer
 {
     public class OggFileReader : VorbisWaveReader, IAudioReader
     {
-        public OggFileReader(string fileName) : base(fileName)
-        { }
+        public OggFileReader(string fileName) : base(fileName) { }
     }
 }

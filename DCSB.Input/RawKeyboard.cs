@@ -1,13 +1,13 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
-using System.ComponentModel;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace DCSB.Input
 {
-	public sealed class RawKeyboard
+    public sealed class RawKeyboard
 	{
 		private readonly Dictionary<IntPtr,KeyPressEvent> _deviceList = new Dictionary<IntPtr,KeyPressEvent>();
 		public delegate void DeviceEventHandler(object sender, InputEventArg e);

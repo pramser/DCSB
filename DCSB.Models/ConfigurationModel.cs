@@ -1,5 +1,5 @@
-﻿using GalaSoft.MvvmLight;
-using DCSB.Utils;
+﻿using DCSB.Utils;
+using GalaSoft.MvvmLight;
 using System.Xml.Serialization;
 
 namespace DCSB.Models

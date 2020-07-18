@@ -1,5 +1,5 @@
-﻿using GalaSoft.MvvmLight;
-using DCSB.Utils;
+﻿using DCSB.Utils;
+using GalaSoft.MvvmLight;
 
 namespace DCSB.Models
 {

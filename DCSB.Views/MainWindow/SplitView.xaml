@@ -15,10 +15,6 @@
         <Converters:AreEqualConverter x:Key="AreEqualConverter" />
         <Converters:VKeysToStringConverter x:Key="vKeysToStringConverter" />
 
-        <DataTemplate x:Key="CounterListView">
-            <local:CounterListView DataContext="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext}" />
-        </DataTemplate>
-
         <DataTemplate x:Key="SoundListView">
             <local:SoundListView DataContext="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext}" />
         </DataTemplate>

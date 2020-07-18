@@ -1,7 +1,7 @@
 ﻿using System;
-using System.IO;
-using System.Globalization;
 using System.ComponentModel;
+using System.Globalization;
+using System.IO;
 using System.Runtime.InteropServices;
 
 namespace DCSB.Input

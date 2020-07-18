@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Windows;
-using System.Windows.Input;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
-using DCSB.Business;
+﻿using DCSB.Business;
 using DCSB.Input;
 using DCSB.Models;
 using DCSB.Utils;
-using System.Threading.Tasks;
-using System.Security.Principal;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
+using System.Security.Principal;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace DCSB.ViewModels
 {

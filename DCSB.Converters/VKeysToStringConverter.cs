@@ -1,8 +1,8 @@
-﻿using System;
+﻿using DCSB.Utils;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
-using DCSB.Utils;
 
 namespace DCSB.Converters
 {
