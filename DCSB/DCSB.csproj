@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net48</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +24,12 @@
     <ProjectReference Include="..\DCSB.Utils\DCSB.Utils.csproj" />
     <ProjectReference Include="..\DCSB.ViewModels\DCSB.ViewModels.csproj" />
     <ProjectReference Include="..\DCSB.Views\DCSB.Views.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="icon.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

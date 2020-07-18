@@ -11,7 +11,6 @@
         MinHeight="150"
         MinWidth="380"
         Loaded="WindowLoaded"
-        Icon="icon.ico"
         Height="{Binding ConfigurationModel.WindowHeight, Mode=TwoWay}"
         Width="{Binding ConfigurationModel.WindowWidth, Mode=TwoWay}">
 
@@ -38,10 +37,6 @@
                                                Open="{Binding ApplicationStateModel.AboutOpened, Mode=TwoWay}" 
                                                DataContext="{Binding}" />
     </i:Interaction.Behaviors>
-
-    <!--<Window.DataContext>
-        <ViewModels:ViewModel/>
-    </Window.DataContext>-->
 
     <Views:SplitView />
 
