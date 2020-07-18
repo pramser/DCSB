@@ -9,7 +9,7 @@ namespace DCSB.Business
 {
     public class UpdateManager
     {
-        private const string releasesUrl = "https://github.com/Kalejin/DCSB/releases";
+        private const string releasesUrl = "https://github.com/pramser/ps/releases";
 
         public async Task AutoUpdateCheck(Version currentVersion)
         {

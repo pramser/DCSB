@@ -8,8 +8,7 @@
              xmlns:Converters="clr-namespace:DCSB.Converters;assembly=DCSB.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300"
-             d:DesignWidth="400"
-             SizeChanged="UserControlSizeChanged">
+             d:DesignWidth="400">
 
     <UserControl.Resources>
         <Converters:DisplayOptionToEnabled x:Key="DisplayOptionToEnabled" />
@@ -35,7 +34,7 @@
             
             <MenuItem Header="Settings" 
                       Command="{Binding OpenSettingsCommand}" />
-            
+
             <MenuItem Header="{Binding ConfigurationModel.SelectedPreset.Name}" 
                       HeaderStringFormat="Preset: {0}"
                       DisplayMemberPath="Name"
@@ -56,27 +55,12 @@
                     </Style>
                 </MenuItem.ItemContainerStyle>
             </MenuItem>
-
-            <MenuItem Header="Not Admin" 
-                      Visibility="{Binding NotAdministrator}" 
-                      Command="{Binding OpenNotAdministratorCommand}" />
-
-            <MenuItem Header="Help"
-                      HorizontalAlignment="Right">
-                <MenuItem Header="About" 
-                          Command="{Binding OpenAboutCommand}" />
-                <MenuItem Header="Check for updates" 
-                          Command="{Binding CheckForUpdatesCommand}" />
-            </MenuItem>
         </Menu>
 
         <ContentControl>
             <ContentControl.Style>
                 <Style TargetType="{x:Type ContentControl}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding ConfigurationModel.Enable}" Value="{x:Static Utils:DisplayOption.Counters}">
-                            <Setter Property="ContentTemplate" Value="{StaticResource CounterListView}" />
-                        </DataTrigger>
                         <DataTrigger Binding="{Binding ConfigurationModel.Enable}" Value="{x:Static Utils:DisplayOption.Sounds}">
                             <Setter Property="ContentTemplate" Value="{StaticResource SoundListView}" />
                         </DataTrigger>
@@ -84,19 +68,8 @@
                 </Style>
             </ContentControl.Style>
 
-            <Grid x:Name="splitterGrid">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="{Binding CountersWidth, Mode=TwoWay}" MinWidth="180" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="{Binding SoundsWidth, Mode=TwoWay}" MinWidth="180" />
-                </Grid.ColumnDefinitions>
+            <ContentControl ContentTemplate="{StaticResource SoundListView}" />
 
-                <ContentControl ContentTemplate="{StaticResource CounterListView}" Grid.Column="0" />
-
-                <GridSplitter HorizontalAlignment="Stretch" Width="5" Grid.Column="1" />
-
-                <ContentControl ContentTemplate="{StaticResource SoundListView}" Grid.Column="2" />
-            </Grid>
         </ContentControl>
 
     </DockPanel>

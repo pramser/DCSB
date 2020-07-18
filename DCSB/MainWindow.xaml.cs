@@ -26,9 +26,6 @@ namespace DCSB
 
         protected override void OnStateChanged(EventArgs e)
         {
-            if (DataContext is ViewModel viewModel && viewModel.ConfigurationModel.MinimizeToTray && WindowState == WindowState.Minimized)
-                Hide();
-
             base.OnStateChanged(e);
         }
 

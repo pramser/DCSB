@@ -23,9 +23,5 @@
         <TabItem Header="Presets">
             <Views:PresetConfigurationView DataContext="{Binding PresetConfigurationViewModel}" />
         </TabItem>
-
-        <TabItem Header="Other">
-            <Views:OtherView />
-        </TabItem>
     </TabControl>
 </Window>
