@@ -35,7 +35,7 @@
                     </Style>
                 </ContentControl.Style>
             </Label>
-            
+
             <Slider x:Name="VolumeSlider"
                     VerticalAlignment="Center"
                     DockPanel.Dock="Right"
@@ -68,98 +68,52 @@
             <StackPanel />
         </DockPanel>
 
-        <DockPanel DockPanel.Dock="Bottom">
-            <Controls:IconButton DockPanel.Dock="Left" 
-                                 Content="{StaticResource AddIcon}"
-                                 Margin="2"
-                                 Command="{Binding AddSoundCommand}"
-                                 ToolTip="Add Sound" />
-            <Controls:IconButton DockPanel.Dock="Left" 
-                                 Content="{StaticResource RemoveIcon}" 
-                                 Margin="2"
-                                 Command="{Binding RemoveSoundCommand}"
-                                 ToolTip="Remove Sound" />
-            <Controls:IconButton DockPanel.Dock="Right" 
-                                 Content="{StaticResource PlayIcon}" 
-                                 Margin="2"
-                                 Command="{Binding ContinueCommand}"
-                                 ToolTip="Play" />
-            <Controls:IconButton DockPanel.Dock="Right" 
-                                 Content="{StaticResource PauseIcon}" 
-                                 Margin="2"
-                                 Command="{Binding PauseCommand}"
-                                 ToolTip="Pause" />
-            <Controls:IconButton DockPanel.Dock="Right" 
-                                 Content="{StaticResource StopIcon}" 
-                                 Margin="2"
-                                 Command="{Binding StopCommand}"
-                                 ToolTip="Stop" />
-            <StackPanel />
-        </DockPanel>
-
-        <DataGrid ItemsSource="{Binding ConfigurationModel.SelectedPreset.SoundCollection}" 
-                  SelectedItem="{Binding ConfigurationModel.SelectedPreset.SelectedSound, Mode=TwoWay}"
-                  Interactivity:Commands.DoubleClickCommand="{Binding PlayCommand}"
-                  AutoGenerateColumns="False"
-                  CanUserReorderColumns="False"
-                  SelectionMode="Single"
-                  CanUserDeleteRows="False" 
-                  HeadersVisibility="Column"
-                  CanUserAddRows="False"
-                  HorizontalScrollBarVisibility="Disabled">
-
-            <DataGrid.ContextMenu>
+        <ListBox
+            ItemsSource="{Binding ConfigurationModel.SelectedPreset.SoundCollection}"
+            SelectedItem="{Binding ConfigurationModel.SelectedPreset.SelectedSound, Mode=TwoWay}"
+            Interactivity:Commands.DoubleClickCommand="{Binding PlayCommand}"
+            SelectionMode="Single">
+            <ListBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Add" 
-                              Command="{Binding AddSoundCommand}"/>
+                    <MenuItem Header="Add" Command="{Binding AddSoundCommand}"/>
                 </ContextMenu>
-            </DataGrid.ContextMenu>
+            </ListBox.ContextMenu>
 
-            <DataGrid.Resources>
-                <ContextMenu x:Key="RowMenu" DataContext="{Binding}">
-                    <MenuItem Header="Edit" 
-                              Command="{Binding DataContext.OpenSoundCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                    <MenuItem Header="Remove" 
-                              Command="{Binding DataContext.RemoveSoundCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                </ContextMenu>
-            </DataGrid.Resources>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Height="80" Width="120" Margin="10">
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Keys, Converter={StaticResource vKeysToStringConverter}}" HorizontalAlignment="Center" />
+                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
 
-            <DataGrid.InputBindings>
-                <KeyBinding Key="Delete" Command="{Binding RemoveSoundCommand}" />
-            </DataGrid.InputBindings>
-
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow" >
-                    <Setter Property="ContextMenu" Value="{StaticResource RowMenu}" />
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="ContextMenu">
+                        <Setter.Value>
+                            <ContextMenu DataContext="{Binding}">
+                                <MenuItem Header="Edit" 
+                              Command="{Binding DataContext.OpenSoundCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+                                <MenuItem Header="Remove" 
+                              Command="{Binding DataContext.RemoveSoundCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+                            </ContextMenu>
+                        </Setter.Value>
+                    </Setter>
                 </Style>
-            </DataGrid.RowStyle>
+            </ListBox.ItemContainerStyle>
 
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" 
-                                    IsReadOnly="True" 
-                                    Binding="{Binding Name}" />
-                <DataGridTemplateColumn Header="Keys"
-                                        IsReadOnly="True"
-                                        Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <DockPanel>
-                                <TextBlock Text="{Binding Keys, Converter={StaticResource vKeysToStringConverter}}" />
-                                <Ellipse Width="10" 
-                                         Height="10" 
-                                         Margin="3,0"
-                                         Fill="#FFD10000" 
-                                         HorizontalAlignment="Right"
-                                         Visibility="{Binding Error, Converter={StaticResource stringToVisibilityConverter}}">
-                                    <Ellipse.ToolTip>
-                                        <ToolTip Content="{Binding Error}" />
-                                    </Ellipse.ToolTip>
-                                </Ellipse>
-                            </DockPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+            <ListBox.InputBindings>
+                <KeyBinding Key="Delete" Command="{Binding RemoveSoundCommand}" />
+            </ListBox.InputBindings>
+
+            <ListBox.Template>
+                <ControlTemplate>
+                    <WrapPanel IsItemsHost="True" />
+                </ControlTemplate>
+            </ListBox.Template>
+        </ListBox>
     </DockPanel>
 </UserControl>

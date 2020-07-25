@@ -17,45 +17,39 @@ namespace DCSB.ViewModels
 {
     public class ViewModel : ObservableObject
     {
-        private ApplicationStateModel _applicationStateModel;
-        private ConfigurationModel _configurationModel;
-
         private ConfigurationManager _configurationManager;
         private OpenFileManager _openFileManager;
         private ShortcutManager _shortcutManager;
         private SoundManager _soundManager;
         private UpdateManager _updateManager;
         private KeyboardInput _keyboardInput;
-
-        private PresetConfigurationViewModel _presetConfigurationViewModel;
-
         private double _previousVolume;
         private double _previousPrimaryVolume;
         private double _previousSecondaryVolume;
 
         public ViewModel()
         {
-            _applicationStateModel = new ApplicationStateModel();
+            ApplicationStateModel = new ApplicationStateModel();
             _configurationManager = new ConfigurationManager();
-            _configurationModel = _configurationManager.Load();
-            if (_configurationModel.PresetCollection.Count == 0) _configurationModel.PresetCollection.Add(new Preset() { Name = "New Preset" } );
+            ConfigurationModel = _configurationManager.Load();
+            if (ConfigurationModel.PresetCollection.Count == 0) ConfigurationModel.PresetCollection.Add(new Preset() { Name = "New Preset" } );
             _openFileManager = new OpenFileManager();
-            _soundManager = new SoundManager(_configurationModel);
-            _shortcutManager = new ShortcutManager(_applicationStateModel, _configurationModel, _soundManager);
+            _soundManager = new SoundManager(ConfigurationModel);
+            _shortcutManager = new ShortcutManager(ApplicationStateModel, ConfigurationModel, _soundManager);
             _updateManager = new UpdateManager();
 
-            _presetConfigurationViewModel = new PresetConfigurationViewModel(_applicationStateModel, _configurationModel);
+            PresetConfigurationViewModel = new PresetConfigurationViewModel(ApplicationStateModel, ConfigurationModel);
 
-            _configurationModel.PropertyChanged += (sender, e) => _configurationManager.Save((ConfigurationModel)sender);
+            ConfigurationModel.PropertyChanged += (sender, e) => _configurationManager.Save((ConfigurationModel)sender);
 
-            _configurationModel.CounterShortcuts.Next.Command = NextCounterCommand;
-            _configurationModel.CounterShortcuts.Previous.Command = PreviousCounterCommand;
-            _configurationModel.CounterShortcuts.Increment.Command = IncrementCommand;
-            _configurationModel.CounterShortcuts.Decrement.Command = DecrementCommand;
-            _configurationModel.CounterShortcuts.Reset.Command = ResetCommand;
-            _configurationModel.SoundShortcuts.Pause.Command = PauseCommand;
-            _configurationModel.SoundShortcuts.Continue.Command = ContinueCommand;
-            _configurationModel.SoundShortcuts.Stop.Command = StopCommand;
+            ConfigurationModel.CounterShortcuts.Next.Command = NextCounterCommand;
+            ConfigurationModel.CounterShortcuts.Previous.Command = PreviousCounterCommand;
+            ConfigurationModel.CounterShortcuts.Increment.Command = IncrementCommand;
+            ConfigurationModel.CounterShortcuts.Decrement.Command = DecrementCommand;
+            ConfigurationModel.CounterShortcuts.Reset.Command = ResetCommand;
+            ConfigurationModel.SoundShortcuts.Pause.Command = PauseCommand;
+            ConfigurationModel.SoundShortcuts.Continue.Command = ContinueCommand;
+            ConfigurationModel.SoundShortcuts.Stop.Command = StopCommand;
 
             Task.Run(() => _updateManager.AutoUpdateCheck(Version));
         }
@@ -71,37 +65,28 @@ namespace DCSB.ViewModels
             }
         }
 
-        public ApplicationStateModel ApplicationStateModel
-        {
-            get { return _applicationStateModel; }
-        }
+        public ApplicationStateModel ApplicationStateModel { get; }
 
-        public ConfigurationModel ConfigurationModel
-        {
-            get { return _configurationModel; }
-        }
+        public ConfigurationModel ConfigurationModel { get; }
 
-        public PresetConfigurationViewModel PresetConfigurationViewModel
-        {
-            get { return _presetConfigurationViewModel; }
-        }
+        public PresetConfigurationViewModel PresetConfigurationViewModel { get; }
 
         public GridLength CountersWidth
         {
-            get { return new GridLength(_configurationModel.CountersWidth, GridUnitType.Star); }
+            get { return new GridLength(ConfigurationModel.CountersWidth, GridUnitType.Star); }
             set
             {
-                _configurationModel.CountersWidth = value.Value;
+                ConfigurationModel.CountersWidth = value.Value;
                 RaisePropertyChanged("CountersWidth");
             }
         }
 
         public GridLength SoundsWidth
         {
-            get { return new GridLength(_configurationModel.SoundsWidth, GridUnitType.Star); }
+            get { return new GridLength(ConfigurationModel.SoundsWidth, GridUnitType.Star); }
             set
             {
-                _configurationModel.SoundsWidth = value.Value;
+                ConfigurationModel.SoundsWidth = value.Value;
                 RaisePropertyChanged("SoundsWidth");
             }
         }
@@ -113,56 +98,56 @@ namespace DCSB.ViewModels
 
         public double CurrentVolume
         {
-            get { return _configurationModel.Volume; }
+            get { return ConfigurationModel.Volume; }
             set
             {
-                _configurationModel.Volume = (int)value;
-                _soundManager.Volume = _configurationModel.Volume / 100f;
+                ConfigurationModel.Volume = (int)value;
+                _soundManager.Volume = ConfigurationModel.Volume / 100f;
                 RaisePropertyChanged("CurrentVolume");
             }
         }
 
         public double PrimaryDeviceVolume
         {
-            get { return _configurationModel.PrimaryDeviceVolume; }
+            get { return ConfigurationModel.PrimaryDeviceVolume; }
             set
             {
-                _configurationModel.PrimaryDeviceVolume = (int)value;
-                _soundManager.PrimaryDeviceVolume = _configurationModel.PrimaryDeviceVolume / 100f;
+                ConfigurationModel.PrimaryDeviceVolume = (int)value;
+                _soundManager.PrimaryDeviceVolume = ConfigurationModel.PrimaryDeviceVolume / 100f;
                 RaisePropertyChanged("PrimaryDeviceVolume");
             }
         }
 
         public double SecondaryDeviceVolume
         {
-            get { return _configurationModel.SecondaryDeviceVolume; }
+            get { return ConfigurationModel.SecondaryDeviceVolume; }
             set
             {
-                _configurationModel.SecondaryDeviceVolume = (int)value;
-                _soundManager.SecondaryDeviceVolume = _configurationModel.SecondaryDeviceVolume / 100f;
+                ConfigurationModel.SecondaryDeviceVolume = (int)value;
+                _soundManager.SecondaryDeviceVolume = ConfigurationModel.SecondaryDeviceVolume / 100f;
                 RaisePropertyChanged("SecondaryDeviceVolume");
             }
         }
 
         public bool Overlap
         {
-            get { return _configurationModel.Overlap; }
+            get { return ConfigurationModel.Overlap; }
             set
             {
-                _configurationModel.Overlap = value;
-                _soundManager.Overlap = _configurationModel.Overlap;
+                ConfigurationModel.Overlap = value;
+                _soundManager.Overlap = ConfigurationModel.Overlap;
                 RaisePropertyChanged("Overlap");
             }
         }
 
         public DisplayOption Enable
         {
-            get { return _configurationModel.Enable; }
+            get { return ConfigurationModel.Enable; }
             set
             {
-                _configurationModel.Enable = value;
+                ConfigurationModel.Enable = value;
                 RaisePropertyChanged("Enable");
-                if (_configurationModel.Enable != DisplayOption.Sounds && _configurationModel.Enable != DisplayOption.Both)
+                if (ConfigurationModel.Enable != DisplayOption.Sounds && ConfigurationModel.Enable != DisplayOption.Both)
                 {
                     _soundManager.Stop();
                 }
@@ -178,12 +163,12 @@ namespace DCSB.ViewModels
         {
             get
             {
-                return _configurationModel.PrimaryOutput;
+                return ConfigurationModel.PrimaryOutput;
             }
             set
             {
                 string selectedDeviceName = _soundManager.ChangePrimaryOutput(value);
-                _configurationModel.PrimaryOutput = selectedDeviceName;
+                ConfigurationModel.PrimaryOutput = selectedDeviceName;
                 RaisePropertyChanged("PrimaryOutput");
             }
         }
@@ -192,12 +177,12 @@ namespace DCSB.ViewModels
         {
             get
             {
-                return _configurationModel.SecondaryOutput;
+                return ConfigurationModel.SecondaryOutput;
             }
             set
             {
                 string selectedDeviceName = _soundManager.ChangeSecondaryOutput(value);
-                _configurationModel.SecondaryOutput = selectedDeviceName;
+                ConfigurationModel.SecondaryOutput = selectedDeviceName;
                 RaisePropertyChanged("SecondaryOutput");
             }
         }
@@ -228,7 +213,7 @@ namespace DCSB.ViewModels
         }
         private void PresetSelected(Preset selectedPreset)
         {
-            _configurationModel.SelectedPreset = selectedPreset;
+            ConfigurationModel.SelectedPreset = selectedPreset;
             foreach (Counter counter in selectedPreset.CounterCollection)
             {
                 counter.ReadFromFile();
@@ -241,7 +226,7 @@ namespace DCSB.ViewModels
         }
         private void OpenSettings()
         {
-            _applicationStateModel.SettingsOpened = true;
+            ApplicationStateModel.SettingsOpened = true;
         }
 
         public ICommand OpenCounterCommand
@@ -250,10 +235,10 @@ namespace DCSB.ViewModels
         }
         private void OpenCounter()
         {
-            if (_configurationModel.SelectedPreset.SelectedCounter != null)
+            if (ConfigurationModel.SelectedPreset.SelectedCounter != null)
             {
-                _applicationStateModel.ModifiedCounter = _configurationModel.SelectedPreset.SelectedCounter;
-                _applicationStateModel.CounterOpened = true;
+                ApplicationStateModel.ModifiedCounter = ConfigurationModel.SelectedPreset.SelectedCounter;
+                ApplicationStateModel.CounterOpened = true;
             }
         }
 
@@ -263,10 +248,10 @@ namespace DCSB.ViewModels
         }
         private void OpenSound()
         {
-            if (_configurationModel.SelectedPreset.SelectedSound != null)
+            if (ConfigurationModel.SelectedPreset.SelectedSound != null)
             {
-                _applicationStateModel.ModifiedSound = _configurationModel.SelectedPreset.SelectedSound;
-                _applicationStateModel.SoundOpened = true;
+                ApplicationStateModel.ModifiedSound = ConfigurationModel.SelectedPreset.SelectedSound;
+                ApplicationStateModel.SoundOpened = true;
             }
         }
 
@@ -276,7 +261,7 @@ namespace DCSB.ViewModels
         }
         private void OpenAbout()
         {
-            _applicationStateModel.AboutOpened = true;
+            ApplicationStateModel.AboutOpened = true;
         }
 
         public ICommand OpenNotAdministratorCommand
@@ -310,7 +295,7 @@ namespace DCSB.ViewModels
             string result = _openFileManager.OpenCounterFile();
             if (result != null)
             {
-                _configurationModel.SelectedPreset.SelectedCounter.File = result;
+                ConfigurationModel.SelectedPreset.SelectedCounter.File = result;
             }
         }
 
@@ -323,10 +308,10 @@ namespace DCSB.ViewModels
             string[] result = _openFileManager.OpenSoundFiles();
             if (result != null)
             {
-                _configurationModel.SelectedPreset.SelectedSound.Files.Clear();
+                ConfigurationModel.SelectedPreset.SelectedSound.Files.Clear();
                 foreach (string file in result)
                 {
-                    _configurationModel.SelectedPreset.SelectedSound.Files.Add(file);
+                    ConfigurationModel.SelectedPreset.SelectedSound.Files.Add(file);
                 }
             }
         }
@@ -338,10 +323,10 @@ namespace DCSB.ViewModels
         private void AddCounter()
         {
             Counter counter = new Counter();
-            _configurationModel.SelectedPreset.CounterCollection.Add(counter);
-            _configurationModel.SelectedPreset.SelectedCounter = counter;
-            _applicationStateModel.ModifiedCounter = counter;
-            _applicationStateModel.CounterOpened = true;
+            ConfigurationModel.SelectedPreset.CounterCollection.Add(counter);
+            ConfigurationModel.SelectedPreset.SelectedCounter = counter;
+            ApplicationStateModel.ModifiedCounter = counter;
+            ApplicationStateModel.CounterOpened = true;
         }
 
         public ICommand RemoveCounterCommand
@@ -350,9 +335,9 @@ namespace DCSB.ViewModels
         }
         private void RemoveCounter()
         {
-            if (_configurationModel.SelectedPreset.SelectedCounter != null)
+            if (ConfigurationModel.SelectedPreset.SelectedCounter != null)
             {
-                _configurationModel.SelectedPreset.CounterCollection.Remove(_configurationModel.SelectedPreset.SelectedCounter);
+                ConfigurationModel.SelectedPreset.CounterCollection.Remove(ConfigurationModel.SelectedPreset.SelectedCounter);
             }
         }
 
@@ -362,9 +347,9 @@ namespace DCSB.ViewModels
         }
         private void Increment()
         {
-            if (_configurationModel.SelectedPreset.SelectedCounter != null)
+            if (ConfigurationModel.SelectedPreset.SelectedCounter != null)
             {
-                _configurationModel.SelectedPreset.SelectedCounter.Count += _configurationModel.SelectedPreset.SelectedCounter.Increment;
+                ConfigurationModel.SelectedPreset.SelectedCounter.Count += ConfigurationModel.SelectedPreset.SelectedCounter.Increment;
             }
         }
 
@@ -374,9 +359,9 @@ namespace DCSB.ViewModels
         }
         private void Decrement()
         {
-            if (_configurationModel.SelectedPreset.SelectedCounter != null)
+            if (ConfigurationModel.SelectedPreset.SelectedCounter != null)
             {
-                _configurationModel.SelectedPreset.SelectedCounter.Count -= _configurationModel.SelectedPreset.SelectedCounter.Increment;
+                ConfigurationModel.SelectedPreset.SelectedCounter.Count -= ConfigurationModel.SelectedPreset.SelectedCounter.Increment;
             }
         }
 
@@ -386,9 +371,9 @@ namespace DCSB.ViewModels
         }
         private void Reset()
         {
-            if (_configurationModel.SelectedPreset.SelectedCounter != null)
+            if (ConfigurationModel.SelectedPreset.SelectedCounter != null)
             {
-                _configurationModel.SelectedPreset.SelectedCounter.Count = 0;
+                ConfigurationModel.SelectedPreset.SelectedCounter.Count = 0;
             }
         }
 
@@ -398,18 +383,18 @@ namespace DCSB.ViewModels
         }
         private void NextCounter()
         {
-            if (_configurationModel.SelectedPreset.SelectedCounter == null )
+            if (ConfigurationModel.SelectedPreset.SelectedCounter == null )
             {
-                if (_configurationModel.SelectedPreset.CounterCollection.Count != 0)
+                if (ConfigurationModel.SelectedPreset.CounterCollection.Count != 0)
                 {
-                    _configurationModel.SelectedPreset.SelectedCounter = _configurationModel.SelectedPreset.CounterCollection[0];
+                    ConfigurationModel.SelectedPreset.SelectedCounter = ConfigurationModel.SelectedPreset.CounterCollection[0];
                 }
             }
             else
             {
-                int currentIndex = _configurationModel.SelectedPreset.CounterCollection.IndexOf(_configurationModel.SelectedPreset.SelectedCounter);
-                int nextIndex = (currentIndex + 1) % _configurationModel.SelectedPreset.CounterCollection.Count;
-                _configurationModel.SelectedPreset.SelectedCounter = _configurationModel.SelectedPreset.CounterCollection[nextIndex];
+                int currentIndex = ConfigurationModel.SelectedPreset.CounterCollection.IndexOf(ConfigurationModel.SelectedPreset.SelectedCounter);
+                int nextIndex = (currentIndex + 1) % ConfigurationModel.SelectedPreset.CounterCollection.Count;
+                ConfigurationModel.SelectedPreset.SelectedCounter = ConfigurationModel.SelectedPreset.CounterCollection[nextIndex];
             }
         }
 
@@ -419,18 +404,18 @@ namespace DCSB.ViewModels
         }
         private void PreviousCounter()
         {
-            if (_configurationModel.SelectedPreset.SelectedCounter == null)
+            if (ConfigurationModel.SelectedPreset.SelectedCounter == null)
             {
-                if (_configurationModel.SelectedPreset.CounterCollection.Count != 0)
+                if (ConfigurationModel.SelectedPreset.CounterCollection.Count != 0)
                 {
-                    _configurationModel.SelectedPreset.SelectedCounter = _configurationModel.SelectedPreset.CounterCollection[0];
+                    ConfigurationModel.SelectedPreset.SelectedCounter = ConfigurationModel.SelectedPreset.CounterCollection[0];
                 }
             }
             else
             {
-                int currentIndex = _configurationModel.SelectedPreset.CounterCollection.IndexOf(_configurationModel.SelectedPreset.SelectedCounter);
-                int previousIndex = (currentIndex - 1 + _configurationModel.SelectedPreset.CounterCollection.Count) % _configurationModel.SelectedPreset.CounterCollection.Count;
-                _configurationModel.SelectedPreset.SelectedCounter = _configurationModel.SelectedPreset.CounterCollection[previousIndex];
+                int currentIndex = ConfigurationModel.SelectedPreset.CounterCollection.IndexOf(ConfigurationModel.SelectedPreset.SelectedCounter);
+                int previousIndex = (currentIndex - 1 + ConfigurationModel.SelectedPreset.CounterCollection.Count) % ConfigurationModel.SelectedPreset.CounterCollection.Count;
+                ConfigurationModel.SelectedPreset.SelectedCounter = ConfigurationModel.SelectedPreset.CounterCollection[previousIndex];
             }
         }
 
@@ -492,10 +477,10 @@ namespace DCSB.ViewModels
         private void AddSound()
         {
             Sound sound = new Sound();
-            _configurationModel.SelectedPreset.SelectedSound = sound;
-            _configurationModel.SelectedPreset.SoundCollection.Add(sound);
-            _applicationStateModel.ModifiedSound = sound;
-            _applicationStateModel.SoundOpened = true;
+            ConfigurationModel.SelectedPreset.SelectedSound = sound;
+            ConfigurationModel.SelectedPreset.SoundCollection.Add(sound);
+            ApplicationStateModel.ModifiedSound = sound;
+            ApplicationStateModel.SoundOpened = true;
         }
 
         public ICommand RemoveSoundCommand
@@ -504,7 +489,7 @@ namespace DCSB.ViewModels
         }
         private void RemoveSound()
         {
-            _configurationModel.SelectedPreset.SoundCollection.Remove(_configurationModel.SelectedPreset.SelectedSound);
+            ConfigurationModel.SelectedPreset.SoundCollection.Remove(ConfigurationModel.SelectedPreset.SelectedSound);
         }
 
         public ICommand PlayCommand
@@ -513,9 +498,9 @@ namespace DCSB.ViewModels
         }
         private void Play()
         {
-            if (_configurationModel.SelectedPreset.SelectedSound != null)
+            if (ConfigurationModel.SelectedPreset.SelectedSound != null)
             {
-                _soundManager.Play(_configurationModel.SelectedPreset.SelectedSound);
+                _soundManager.Play(ConfigurationModel.SelectedPreset.SelectedSound);
             }
         }
 
@@ -552,8 +537,8 @@ namespace DCSB.ViewModels
         }
         public void BindKeys(IBindable bindable)
         {
-            _applicationStateModel.ModifiedBindable = bindable;
-            _applicationStateModel.BindKeysOpened = true;
+            ApplicationStateModel.ModifiedBindable = bindable;
+            ApplicationStateModel.BindKeysOpened = true;
         }
 
         public ICommand CancelBindKeysCommand
@@ -562,8 +547,8 @@ namespace DCSB.ViewModels
         }
         public void CancelBindKeys()
         {
-            _applicationStateModel.BindKeysOpened = false;
-            _applicationStateModel.ModifiedBindable = null;
+            ApplicationStateModel.BindKeysOpened = false;
+            ApplicationStateModel.ModifiedBindable = null;
         }
 
         public ICommand ClearKeysCommand
@@ -572,9 +557,9 @@ namespace DCSB.ViewModels
         }
         private void ClearKeys()
         {
-            _applicationStateModel.BindKeysOpened = false;
-            _applicationStateModel.ModifiedBindable.Keys.Clear();
-            _applicationStateModel.ModifiedBindable = null;
+            ApplicationStateModel.BindKeysOpened = false;
+            ApplicationStateModel.ModifiedBindable.Keys.Clear();
+            ApplicationStateModel.ModifiedBindable = null;
         }
 
         public ICommand ClosingCommand
@@ -588,12 +573,12 @@ namespace DCSB.ViewModels
 
         private bool AreCountersEnabled()
         {
-            return _configurationModel.Enable == DisplayOption.Counters || _configurationModel.Enable == DisplayOption.Both;
+            return ConfigurationModel.Enable == DisplayOption.Counters || ConfigurationModel.Enable == DisplayOption.Both;
         }
 
         private bool AreSoundsEnabled()
         {
-            return _configurationModel.Enable == DisplayOption.Sounds || _configurationModel.Enable == DisplayOption.Both;
+            return ConfigurationModel.Enable == DisplayOption.Sounds || ConfigurationModel.Enable == DisplayOption.Both;
         }
     }
 }
