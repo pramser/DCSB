@@ -15,6 +15,10 @@ namespace DCSB.Business
         {
             try
             {
+                string[] args = Environment.GetCommandLineArgs();
+
+                if (args.Length > 0 && args[1] == "--skip-update-check") return;
+
                 Version newVersion = await GetNewestVersion();
                 if (newVersion > currentVersion)
                 {
