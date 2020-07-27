@@ -22,14 +22,10 @@
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <Menu.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <DockPanel HorizontalAlignment="Stretch"/>
-                </ItemsPanelTemplate>
-            </Menu.ItemsPanel>
-            
-            <MenuItem Header="Settings" 
-                      Command="{Binding OpenSettingsCommand}" />
+            <MenuItem Header="File">
+                <MenuItem Header="Settings" Command="{Binding OpenSettingsCommand}" />
+                <MenuItem Header="Add Sound" Command="{Binding AddSoundCommand}" />
+            </MenuItem>
 
             <MenuItem Header="{Binding ConfigurationModel.SelectedPreset.Name}" 
                       HeaderStringFormat="Preset: {0}"
