@@ -83,7 +83,8 @@
                 <DataTemplate>
                     <Border Height="80" Width="120" Margin="10">
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="{Binding Keys, Converter={StaticResource vKeysToStringConverter}}" HorizontalAlignment="Center" />
+                            <Rectangle Width="30" Height="30" Fill="Blue" Margin="5"/>
+                            <TextBlock Text="{Binding Keys, Converter={StaticResource vKeysToStringConverter}}" FontWeight="DemiBold" HorizontalAlignment="Center" />
                             <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" />
                         </StackPanel>
                     </Border>
