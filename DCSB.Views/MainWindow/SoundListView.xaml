@@ -75,7 +75,8 @@
             SelectionMode="Single">
             <ListBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Add" Command="{Binding AddSoundCommand}"/>
+                    <MenuItem Header="Edit" Command="{Binding OpenSoundCommand}" />
+                    <MenuItem Header="Remove" Command="{Binding RemoveSoundCommand}" />
                 </ContextMenu>
             </ListBox.ContextMenu>
 
@@ -90,21 +91,6 @@
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="ContextMenu">
-                        <Setter.Value>
-                            <ContextMenu DataContext="{Binding}">
-                                <MenuItem Header="Edit" 
-                              Command="{Binding DataContext.OpenSoundCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" />
-                                <MenuItem Header="Remove" 
-                              Command="{Binding DataContext.RemoveSoundCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" />
-                            </ContextMenu>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListBox.ItemContainerStyle>
 
             <ListBox.InputBindings>
                 <KeyBinding Key="Delete" Command="{Binding RemoveSoundCommand}" />
