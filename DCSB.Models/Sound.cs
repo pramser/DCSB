@@ -65,6 +65,25 @@ namespace DCSB.Models
             }
         }
 
+        private string _emoji;
+        public string Emoji
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_emoji))
+                {
+                    return "✔";
+                }
+
+                return _emoji;
+            }
+            set
+            {
+                _emoji = value;
+                RaisePropertyChanged("Emoji");
+            }
+        }
+
         private string _error;
         [XmlIgnore]
         public string Error
@@ -81,6 +100,7 @@ namespace DCSB.Models
         {
             _keys = new ObservableCollection<VKey>();
             _files = new ObservableCollection<string>();
+            _emoji = null;
 
             _keys.CollectionChanged += (sender, e) => RaisePropertyChanged("Keys");
             _files.CollectionChanged += (sender, e) => RaisePropertyChanged("Files");

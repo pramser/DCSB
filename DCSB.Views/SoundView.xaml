@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Converters="clr-namespace:DCSB.Converters;assembly=DCSB.Converters"
              xmlns:Interactivity="clr-namespace:DCSB.Interactivity;assembly=DCSB.Interactivity"
+             xmlns:emoji="clr-namespace:Emoji.Wpf;assembly=Emoji.Wpf"
              Width="500">
 
     <UserControl.Resources>
@@ -17,6 +18,7 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition />
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
@@ -42,13 +44,16 @@
         <Button Grid.Row="2" Grid.Column="2" Margin="0,5,5,5" Width="20" Command="{Binding BindKeysCommand}" 
                 CommandParameter="{Binding ApplicationStateModel.ModifiedSound}">...</Button>
 
-        <Label Grid.Row="3" Grid.Column="0">Volume:</Label>
-        <Slider Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" Maximum="100" AutoToolTipPlacement="BottomRight"
+        <Label Grid.Row="3" Grid.Column="0">Emoji:</Label>
+        <emoji:Picker Grid.Row="3" Grid.Column="1" FontSize="20" Selection="{Binding ApplicationStateModel.ModifiedSound.Emoji}" />
+
+        <Label Grid.Row="4" Grid.Column="0">Volume:</Label>
+        <Slider Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" Maximum="100" AutoToolTipPlacement="BottomRight"
                 IsMoveToPointEnabled="True" ToolTip="Change applies next time you play this sound"
                 Value="{Binding ApplicationStateModel.ModifiedSound.Volume}"/>
 
-        <Label Grid.Row="4" Grid.Column="0">Loop:</Label>
-        <CheckBox Grid.Row="4" Grid.Column="1" Margin="5" ToolTip="Change applies next time you play this sound"
+        <Label Grid.Row="5" Grid.Column="0">Loop:</Label>
+        <CheckBox Grid.Row="5" Grid.Column="1" Margin="5" ToolTip="Change applies next time you play this sound"
                   IsChecked="{Binding ApplicationStateModel.ModifiedSound.Loop}" />
     </Grid>
 </UserControl>

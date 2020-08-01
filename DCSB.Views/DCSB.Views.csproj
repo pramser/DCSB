@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Emoji.Wpf" Version="0.0.19-experimental" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DCSB.Converters\DCSB.Converters.csproj" />
     <ProjectReference Include="..\DCSB.Controls\DCSB.Controls.csproj" />
     <ProjectReference Include="..\DCSB.Interactivity\DCSB.Interactivity.csproj" />
