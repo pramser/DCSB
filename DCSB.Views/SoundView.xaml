@@ -45,7 +45,10 @@
                 CommandParameter="{Binding ApplicationStateModel.ModifiedSound}">...</Button>
 
         <Label Grid.Row="3" Grid.Column="0">Emoji:</Label>
-        <emoji:Picker Grid.Row="3" Grid.Column="1" FontSize="20" Selection="{Binding ApplicationStateModel.ModifiedSound.Emoji}" />
+        <emoji:Picker Grid.Row="3"
+                      Grid.Column="1"
+                      FontSize="20"
+                      Selection="{Binding ApplicationStateModel.ModifiedSound.Emoji, Mode=TwoWay}" />
 
         <Label Grid.Row="4" Grid.Column="0">Volume:</Label>
         <Slider Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" Maximum="100" AutoToolTipPlacement="BottomRight"
