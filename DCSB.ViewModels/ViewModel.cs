@@ -17,11 +17,12 @@ namespace DCSB.ViewModels
 {
     public class ViewModel : ObservableObject
     {
-        private ConfigurationManager _configurationManager;
-        private OpenFileManager _openFileManager;
-        private ShortcutManager _shortcutManager;
-        private SoundManager _soundManager;
-        private UpdateManager _updateManager;
+        private readonly ConfigurationManager _configurationManager;
+        private readonly OpenFileManager _openFileManager;
+        private readonly ShortcutManager _shortcutManager;
+        private readonly SoundManager _soundManager;
+        private readonly UpdateManager _updateManager;
+
         private KeyboardInput _keyboardInput;
         private double _previousVolume;
         private double _previousPrimaryVolume;
@@ -32,7 +33,12 @@ namespace DCSB.ViewModels
             ApplicationStateModel = new ApplicationStateModel();
             _configurationManager = new ConfigurationManager();
             ConfigurationModel = _configurationManager.Load();
-            if (ConfigurationModel.PresetCollection.Count == 0) ConfigurationModel.PresetCollection.Add(new Preset() { Name = "New Preset" } );
+            
+            if (ConfigurationModel.PresetCollection.Count == 0)
+            {
+                ConfigurationModel.PresetCollection.Add(new Preset() { Name = "New Preset" });
+            }
+
             _openFileManager = new OpenFileManager();
             _soundManager = new SoundManager(ConfigurationModel);
             _shortcutManager = new ShortcutManager(ApplicationStateModel, ConfigurationModel, _soundManager);
@@ -71,14 +77,15 @@ namespace DCSB.ViewModels
 
         public PresetConfigurationViewModel PresetConfigurationViewModel { get; }
 
-        private ObservableObjectCollection<Sound> SoundCollection
+        public ObservableObjectCollection<Sound> SoundCollection
         {
             get { return ConfigurationModel.SelectedPreset.SoundCollection; }
         }
 
-        private Sound SelectedSound
+        public Sound SelectedSound
         {
             get { return ConfigurationModel.SelectedPreset.SelectedSound; }
+            set { ConfigurationModel.SelectedPreset.SelectedSound = value; }
         }
 
         public GridLength CountersWidth

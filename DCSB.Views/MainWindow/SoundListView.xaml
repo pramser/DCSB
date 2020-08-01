@@ -69,8 +69,8 @@
         </DockPanel>
 
         <ListBox
-            ItemsSource="{Binding ConfigurationModel.SelectedPreset.SoundCollection}"
-            SelectedItem="{Binding ConfigurationModel.SelectedPreset.SelectedSound, Mode=TwoWay}"
+            ItemsSource="{Binding SoundCollection}"
+            SelectedItem="{Binding SelectedSound, Mode=TwoWay}"
             Interactivity:Commands.DoubleClickCommand="{Binding PlayCommand}"
             SelectionMode="Single">
             <ListBox.ContextMenu>
@@ -86,9 +86,24 @@
                 <DataTemplate>
                     <Border Height="80" Width="120" Margin="10">
                         <StackPanel VerticalAlignment="Center">
-                            <Rectangle Width="30" Height="30" Fill="Blue" Margin="5"/>
-                            <TextBlock Text="{Binding Keys, Converter={StaticResource vKeysToStringConverter}}" FontWeight="DemiBold" HorizontalAlignment="Center" />
-                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" />
+                            <TextBlock Text="0"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       TextAlignment="Center"
+                                       FontSize="24"
+                                       Width="36"
+                                       Height="36"
+                                       Padding="1"
+                                       Foreground="White"
+                                       Background="Black"
+                                       Margin="5" />
+                            
+                            <TextBlock Text="{Binding Keys, Converter={StaticResource vKeysToStringConverter}}"
+                                       FontWeight="DemiBold"
+                                       HorizontalAlignment="Center" />
+                            
+                            <TextBlock Text="{Binding Name}"
+                                       HorizontalAlignment="Center" />
                         </StackPanel>
                     </Border>
                 </DataTemplate>
