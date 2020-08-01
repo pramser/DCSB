@@ -71,6 +71,16 @@ namespace DCSB.ViewModels
 
         public PresetConfigurationViewModel PresetConfigurationViewModel { get; }
 
+        private ObservableObjectCollection<Sound> SoundCollection
+        {
+            get { return ConfigurationModel.SelectedPreset.SoundCollection; }
+        }
+
+        private Sound SelectedSound
+        {
+            get { return ConfigurationModel.SelectedPreset.SelectedSound; }
+        }
+
         public GridLength CountersWidth
         {
             get { return new GridLength(ConfigurationModel.CountersWidth, GridUnitType.Star); }
@@ -202,6 +212,7 @@ namespace DCSB.ViewModels
         {
             get { return new RelayCommand(CheckForUpdates); }
         }
+
         private async void CheckForUpdates()
         {
             await _updateManager.ManualUpdateCheck(Version);
@@ -211,6 +222,7 @@ namespace DCSB.ViewModels
         {
             get { return new RelayCommand<Preset>(PresetSelected); }
         }
+
         private void PresetSelected(Preset selectedPreset)
         {
             ConfigurationModel.SelectedPreset = selectedPreset;
@@ -224,6 +236,7 @@ namespace DCSB.ViewModels
         {
             get { return new RelayCommand(OpenSettings); }
         }
+
         private void OpenSettings()
         {
             ApplicationStateModel.SettingsOpened = true;
@@ -246,6 +259,7 @@ namespace DCSB.ViewModels
         {
             get { return new RelayCommand(OpenSound, AreSoundsEnabled); }
         }
+
         private void OpenSound()
         {
             if (ConfigurationModel.SelectedPreset.SelectedSound != null)
@@ -259,6 +273,7 @@ namespace DCSB.ViewModels
         {
             get { return new RelayCommand(OpenAbout); }
         }
+
         private void OpenAbout()
         {
             ApplicationStateModel.AboutOpened = true;
@@ -290,6 +305,7 @@ namespace DCSB.ViewModels
         {
             get { return new RelayCommand(OpenCounterFileDialog, AreCountersEnabled); }
         }
+
         private void OpenCounterFileDialog()
         {
             string result = _openFileManager.OpenCounterFile();
@@ -303,6 +319,7 @@ namespace DCSB.ViewModels
         {
             get { return new RelayCommand(OpenSoundFileDialog, AreSoundsEnabled); }
         }
+
         private void OpenSoundFileDialog()
         {
             string[] result = _openFileManager.OpenSoundFiles();
@@ -320,6 +337,7 @@ namespace DCSB.ViewModels
         {
             get { return new RelayCommand(AddCounter, AreCountersEnabled); }
         }
+
         private void AddCounter()
         {
             Counter counter = new Counter();
@@ -333,6 +351,7 @@ namespace DCSB.ViewModels
         {
             get { return new RelayCommand(RemoveCounter, AreCountersEnabled); }
         }
+
         private void RemoveCounter()
         {
             if (ConfigurationModel.SelectedPreset.SelectedCounter != null)
@@ -474,6 +493,7 @@ namespace DCSB.ViewModels
         {
             get { return new RelayCommand(AddSound, AreSoundsEnabled); }
         }
+
         private void AddSound()
         {
             Sound sound = new Sound();
@@ -487,20 +507,57 @@ namespace DCSB.ViewModels
         {
             get { return new RelayCommand(RemoveSound, AreSoundsEnabled); }
         }
+
         private void RemoveSound()
         {
-            ConfigurationModel.SelectedPreset.SoundCollection.Remove(ConfigurationModel.SelectedPreset.SelectedSound);
+            SoundCollection.Remove(SelectedSound);
+        }
+
+        public ICommand MoveUpCommand
+        {
+            get { return new RelayCommand(MoveUp, AreSoundsEnabled); }
+        }
+
+        private void MoveUp()
+        {
+            int currentIndex = SoundCollection.IndexOf(SelectedSound);
+            int maxIndex = SoundCollection.Count - 1;
+
+            if (currentIndex == maxIndex)
+            {
+                return;
+            }
+
+            SoundCollection.Move(currentIndex, currentIndex + 1);
+        }
+
+        public ICommand MoveDownCommand
+        {
+            get { return new RelayCommand(MoveDown, AreSoundsEnabled); }
+        }
+
+        private void MoveDown()
+        {
+            int currentIndex = SoundCollection.IndexOf(SelectedSound);
+
+            if (currentIndex < 1)
+            {
+                return;
+            }
+
+            SoundCollection.Move(currentIndex, currentIndex - 1);
         }
 
         public ICommand PlayCommand
         {
             get { return new RelayCommand(Play, AreSoundsEnabled); }
         }
+
         private void Play()
         {
-            if (ConfigurationModel.SelectedPreset.SelectedSound != null)
+            if (SelectedSound != null)
             {
-                _soundManager.Play(ConfigurationModel.SelectedPreset.SelectedSound);
+                _soundManager.Play(SelectedSound);
             }
         }
 
@@ -508,6 +565,7 @@ namespace DCSB.ViewModels
         {
             get { return new RelayCommand(Pause, AreSoundsEnabled); }
         }
+
         private void Pause()
         {
             _soundManager.Pause();
@@ -517,6 +575,7 @@ namespace DCSB.ViewModels
         {
             get { return new RelayCommand(Continue, AreSoundsEnabled); }
         }
+
         private void Continue()
         {
             _soundManager.Continue();
@@ -526,6 +585,7 @@ namespace DCSB.ViewModels
         {
             get { return new RelayCommand(Stop, AreSoundsEnabled); }
         }
+
         private void Stop()
         {
             _soundManager.Stop();
@@ -535,6 +595,7 @@ namespace DCSB.ViewModels
         {
             get { return new RelayCommand<IBindable>(BindKeys); }
         }
+
         public void BindKeys(IBindable bindable)
         {
             ApplicationStateModel.ModifiedBindable = bindable;
@@ -545,6 +606,7 @@ namespace DCSB.ViewModels
         {
             get { return new RelayCommand(CancelBindKeys); }
         }
+
         public void CancelBindKeys()
         {
             ApplicationStateModel.BindKeysOpened = false;
@@ -555,6 +617,7 @@ namespace DCSB.ViewModels
         {
             get { return new RelayCommand(ClearKeys); }
         }
+
         private void ClearKeys()
         {
             ApplicationStateModel.BindKeysOpened = false;

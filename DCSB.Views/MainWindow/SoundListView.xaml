@@ -77,6 +77,8 @@
                 <ContextMenu>
                     <MenuItem Header="Edit" Command="{Binding OpenSoundCommand}" />
                     <MenuItem Header="Remove" Command="{Binding RemoveSoundCommand}" />
+                    <MenuItem Header="Move Down" Command="{Binding MoveDownCommand}" />
+                    <MenuItem Header="Move Up" Command="{Binding MoveUpCommand}" />
                 </ContextMenu>
             </ListBox.ContextMenu>
 
