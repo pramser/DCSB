@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DCSB.Views.SettingsWindow"
-             xmlns:Converters="clr-namespace:DCSB.Converters;assembly=DCSB.Converters"
-             xmlns:Controls="clr-namespace:DCSB.Controls;assembly=DCSB.Controls"
-             xmlns:Interactivity="clr-namespace:DCSB.Interactivity;assembly=DCSB.Interactivity"
+             xmlns:Converters="clr-namespace:DCSB.Converters"
+             xmlns:Controls="clr-namespace:DCSB.Controls"
+             xmlns:Interactivity="clr-namespace:DCSB.Interactivity"
              mc:Ignorable="d" 
              d:DesignWidth="300">
 

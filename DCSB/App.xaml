@@ -5,8 +5,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary x:Name="ButtonIconDictionary" Source="/DCSB.Icons;component/Buttons.xaml" />
-                <ResourceDictionary x:Name="VolumeIconDictionary" Source="/DCSB.Icons;component/Volume.xaml" />
+                <ResourceDictionary x:Name="ButtonIconDictionary" Source="Buttons.xaml" />
+                <ResourceDictionary x:Name="VolumeIconDictionary" Source="Volume.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

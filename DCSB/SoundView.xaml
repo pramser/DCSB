@@ -1,8 +1,8 @@
 ﻿<UserControl x:Class="DCSB.Views.SoundView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:Converters="clr-namespace:DCSB.Converters;assembly=DCSB.Converters"
-             xmlns:Interactivity="clr-namespace:DCSB.Interactivity;assembly=DCSB.Interactivity"
+             xmlns:Converters="clr-namespace:DCSB.Converters"
+             xmlns:Interactivity="clr-namespace:DCSB.Interactivity"
              xmlns:emoji="clr-namespace:Emoji.Wpf;assembly=Emoji.Wpf"
              Width="500">
 
