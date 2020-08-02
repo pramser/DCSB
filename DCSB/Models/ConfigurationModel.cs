@@ -1,5 +1,4 @@
-﻿using ps.Utils;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using System.Xml.Serialization;
 
 namespace ps.Models

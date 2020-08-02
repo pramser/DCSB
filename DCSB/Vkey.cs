@@ -1,4 +1,4 @@
-﻿namespace ps.Utils
+﻿namespace ps
 {
     public enum VKey
     {

@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ps.Views.MainWindow"
-             xmlns:Utils="clr-namespace:ps.Utils"
              xmlns:Converters="clr-namespace:ps.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300"
@@ -50,18 +49,7 @@
         </Menu>
 
         <ContentControl>
-            <ContentControl.Style>
-                <Style TargetType="{x:Type ContentControl}">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ConfigurationModel.Enable}" Value="{x:Static Utils:DisplayOption.Sounds}">
-                            <Setter Property="ContentTemplate" Value="{StaticResource SoundListView}" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ContentControl.Style>
-
             <ContentControl ContentTemplate="{StaticResource SoundListView}" />
-
         </ContentControl>
 
     </DockPanel>
