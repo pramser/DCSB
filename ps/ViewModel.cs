@@ -47,11 +47,6 @@ namespace ps.ViewModels
 
             ConfigurationModel.PropertyChanged += (sender, e) => _configurationManager.Save((ConfigurationModel)sender);
 
-            ConfigurationModel.CounterShortcuts.Next.Command = NextCounterCommand;
-            ConfigurationModel.CounterShortcuts.Previous.Command = PreviousCounterCommand;
-            ConfigurationModel.CounterShortcuts.Increment.Command = IncrementCommand;
-            ConfigurationModel.CounterShortcuts.Decrement.Command = DecrementCommand;
-            ConfigurationModel.CounterShortcuts.Reset.Command = ResetCommand;
             ConfigurationModel.SoundShortcuts.Pause.Command = PauseCommand;
             ConfigurationModel.SoundShortcuts.Continue.Command = ContinueCommand;
             ConfigurationModel.SoundShortcuts.Stop.Command = StopCommand;
@@ -85,16 +80,6 @@ namespace ps.ViewModels
         {
             get { return ConfigurationModel.SelectedPreset.SelectedSound; }
             set { ConfigurationModel.SelectedPreset.SelectedSound = value; }
-        }
-
-        public GridLength CountersWidth
-        {
-            get { return new GridLength(ConfigurationModel.CountersWidth, GridUnitType.Star); }
-            set
-            {
-                ConfigurationModel.CountersWidth = value.Value;
-                RaisePropertyChanged("CountersWidth");
-            }
         }
 
         public GridLength SoundsWidth
@@ -153,20 +138,6 @@ namespace ps.ViewModels
                 ConfigurationModel.Overlap = value;
                 _soundManager.Overlap = ConfigurationModel.Overlap;
                 RaisePropertyChanged("Overlap");
-            }
-        }
-
-        public DisplayOption Enable
-        {
-            get { return ConfigurationModel.Enable; }
-            set
-            {
-                ConfigurationModel.Enable = value;
-                RaisePropertyChanged("Enable");
-                if (ConfigurationModel.Enable != DisplayOption.Sounds && ConfigurationModel.Enable != DisplayOption.Both)
-                {
-                    _soundManager.Stop();
-                }
             }
         }
 
@@ -232,10 +203,6 @@ namespace ps.ViewModels
         private void PresetSelected(Preset selectedPreset)
         {
             ConfigurationModel.SelectedPreset = selectedPreset;
-            foreach (Counter counter in selectedPreset.CounterCollection)
-            {
-                counter.ReadFromFile();
-            }
         }
 
         public ICommand OpenSettingsCommand
@@ -248,22 +215,9 @@ namespace ps.ViewModels
             ApplicationStateModel.SettingsOpened = true;
         }
 
-        public ICommand OpenCounterCommand
-        {
-            get { return new RelayCommand(OpenCounter, AreCountersEnabled); }
-        }
-        private void OpenCounter()
-        {
-            if (ConfigurationModel.SelectedPreset.SelectedCounter != null)
-            {
-                ApplicationStateModel.ModifiedCounter = ConfigurationModel.SelectedPreset.SelectedCounter;
-                ApplicationStateModel.CounterOpened = true;
-            }
-        }
-
         public ICommand OpenSoundCommand
         {
-            get { return new RelayCommand(OpenSound, AreSoundsEnabled); }
+            get { return new RelayCommand(OpenSound); }
         }
 
         private void OpenSound()
@@ -307,23 +261,9 @@ namespace ps.ViewModels
             }
         }
 
-        public ICommand OpenCounterFileDialogCommand
-        {
-            get { return new RelayCommand(OpenCounterFileDialog, AreCountersEnabled); }
-        }
-
-        private void OpenCounterFileDialog()
-        {
-            string result = _openFileManager.OpenCounterFile();
-            if (result != null)
-            {
-                ConfigurationModel.SelectedPreset.SelectedCounter.File = result;
-            }
-        }
-
         public ICommand OpenSoundFileDialogCommand
         {
-            get { return new RelayCommand(OpenSoundFileDialog, AreSoundsEnabled); }
+            get { return new RelayCommand(OpenSoundFileDialog); }
         }
 
         private void OpenSoundFileDialog()
@@ -339,114 +279,9 @@ namespace ps.ViewModels
             }
         }
 
-        public ICommand AddCounterCommand
-        {
-            get { return new RelayCommand(AddCounter, AreCountersEnabled); }
-        }
-
-        private void AddCounter()
-        {
-            Counter counter = new Counter();
-            ConfigurationModel.SelectedPreset.CounterCollection.Add(counter);
-            ConfigurationModel.SelectedPreset.SelectedCounter = counter;
-            ApplicationStateModel.ModifiedCounter = counter;
-            ApplicationStateModel.CounterOpened = true;
-        }
-
-        public ICommand RemoveCounterCommand
-        {
-            get { return new RelayCommand(RemoveCounter, AreCountersEnabled); }
-        }
-
-        private void RemoveCounter()
-        {
-            if (ConfigurationModel.SelectedPreset.SelectedCounter != null)
-            {
-                ConfigurationModel.SelectedPreset.CounterCollection.Remove(ConfigurationModel.SelectedPreset.SelectedCounter);
-            }
-        }
-
-        public ICommand IncrementCommand
-        {
-            get { return new RelayCommand(Increment, AreCountersEnabled); }
-        }
-        private void Increment()
-        {
-            if (ConfigurationModel.SelectedPreset.SelectedCounter != null)
-            {
-                ConfigurationModel.SelectedPreset.SelectedCounter.Count += ConfigurationModel.SelectedPreset.SelectedCounter.Increment;
-            }
-        }
-
-        public ICommand DecrementCommand
-        {
-            get { return new RelayCommand(Decrement, AreCountersEnabled); }
-        }
-        private void Decrement()
-        {
-            if (ConfigurationModel.SelectedPreset.SelectedCounter != null)
-            {
-                ConfigurationModel.SelectedPreset.SelectedCounter.Count -= ConfigurationModel.SelectedPreset.SelectedCounter.Increment;
-            }
-        }
-
-        public ICommand ResetCommand
-        {
-            get { return new RelayCommand(Reset, AreCountersEnabled); }
-        }
-        private void Reset()
-        {
-            if (ConfigurationModel.SelectedPreset.SelectedCounter != null)
-            {
-                ConfigurationModel.SelectedPreset.SelectedCounter.Count = 0;
-            }
-        }
-
-        public ICommand NextCounterCommand
-        {
-            get { return new RelayCommand(NextCounter, AreCountersEnabled); }
-        }
-        private void NextCounter()
-        {
-            if (ConfigurationModel.SelectedPreset.SelectedCounter == null )
-            {
-                if (ConfigurationModel.SelectedPreset.CounterCollection.Count != 0)
-                {
-                    ConfigurationModel.SelectedPreset.SelectedCounter = ConfigurationModel.SelectedPreset.CounterCollection[0];
-                }
-            }
-            else
-            {
-                int currentIndex = ConfigurationModel.SelectedPreset.CounterCollection.IndexOf(ConfigurationModel.SelectedPreset.SelectedCounter);
-                int nextIndex = (currentIndex + 1) % ConfigurationModel.SelectedPreset.CounterCollection.Count;
-                ConfigurationModel.SelectedPreset.SelectedCounter = ConfigurationModel.SelectedPreset.CounterCollection[nextIndex];
-            }
-        }
-
-        public ICommand PreviousCounterCommand
-        {
-            get { return new RelayCommand(PreviousCounter, AreCountersEnabled); }
-        }
-        private void PreviousCounter()
-        {
-            if (ConfigurationModel.SelectedPreset.SelectedCounter == null)
-            {
-                if (ConfigurationModel.SelectedPreset.CounterCollection.Count != 0)
-                {
-                    ConfigurationModel.SelectedPreset.SelectedCounter = ConfigurationModel.SelectedPreset.CounterCollection[0];
-                }
-            }
-            else
-            {
-                int currentIndex = ConfigurationModel.SelectedPreset.CounterCollection.IndexOf(ConfigurationModel.SelectedPreset.SelectedCounter);
-                int previousIndex = (currentIndex - 1 + ConfigurationModel.SelectedPreset.CounterCollection.Count) % ConfigurationModel.SelectedPreset.CounterCollection.Count;
-                ConfigurationModel.SelectedPreset.SelectedCounter = ConfigurationModel.SelectedPreset.CounterCollection[previousIndex];
-            }
-        }
-
         public ICommand MuteCommand
         {
-            get { return new RelayCommand(Mute, AreSoundsEnabled); }
+            get { return new RelayCommand(Mute); }
         }
         private void Mute()
         {
@@ -497,7 +332,7 @@ namespace ps.ViewModels
 
         public ICommand AddSoundCommand
         {
-            get { return new RelayCommand(AddSound, AreSoundsEnabled); }
+            get { return new RelayCommand(AddSound); }
         }
 
         private void AddSound()
@@ -511,7 +346,7 @@ namespace ps.ViewModels
 
         public ICommand RemoveSoundCommand
         {
-            get { return new RelayCommand(RemoveSound, AreSoundsEnabled); }
+            get { return new RelayCommand(RemoveSound); }
         }
 
         private void RemoveSound()
@@ -521,7 +356,7 @@ namespace ps.ViewModels
 
         public ICommand MoveUpCommand
         {
-            get { return new RelayCommand(MoveUp, AreSoundsEnabled); }
+            get { return new RelayCommand(MoveUp); }
         }
 
         private void MoveUp()
@@ -539,7 +374,7 @@ namespace ps.ViewModels
 
         public ICommand MoveDownCommand
         {
-            get { return new RelayCommand(MoveDown, AreSoundsEnabled); }
+            get { return new RelayCommand(MoveDown); }
         }
 
         private void MoveDown()
@@ -556,7 +391,7 @@ namespace ps.ViewModels
 
         public ICommand PlayCommand
         {
-            get { return new RelayCommand(Play, AreSoundsEnabled); }
+            get { return new RelayCommand(Play); }
         }
 
         private void Play()
@@ -569,7 +404,7 @@ namespace ps.ViewModels
 
         public ICommand PauseCommand
         {
-            get { return new RelayCommand(Pause, AreSoundsEnabled); }
+            get { return new RelayCommand(Pause); }
         }
 
         private void Pause()
@@ -579,7 +414,7 @@ namespace ps.ViewModels
 
         public ICommand ContinueCommand
         {
-            get { return new RelayCommand(Continue, AreSoundsEnabled); }
+            get { return new RelayCommand(Continue); }
         }
 
         private void Continue()
@@ -589,7 +424,7 @@ namespace ps.ViewModels
 
         public ICommand StopCommand
         {
-            get { return new RelayCommand(Stop, AreSoundsEnabled); }
+            get { return new RelayCommand(Stop); }
         }
 
         private void Stop()
@@ -638,16 +473,6 @@ namespace ps.ViewModels
         private void Closing()
         {
             _configurationManager.Dispose();
-        }
-
-        private bool AreCountersEnabled()
-        {
-            return ConfigurationModel.Enable == DisplayOption.Counters || ConfigurationModel.Enable == DisplayOption.Both;
-        }
-
-        private bool AreSoundsEnabled()
-        {
-            return ConfigurationModel.Enable == DisplayOption.Sounds || ConfigurationModel.Enable == DisplayOption.Both;
         }
     }
 }

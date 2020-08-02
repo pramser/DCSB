@@ -10,7 +10,6 @@
              d:DesignWidth="400">
 
     <UserControl.Resources>
-        <Converters:DisplayOptionToEnabled x:Key="DisplayOptionToEnabled" />
         <Converters:AreEqualConverter x:Key="AreEqualConverter" />
         <Converters:VKeysToStringConverter x:Key="vKeysToStringConverter" />
 
