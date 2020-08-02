@@ -1,6 +1,6 @@
 ﻿using NAudio.Vorbis;
 
-namespace ps.SoundPlayer
+namespace ps.Audio
 {
     public class OggFileReader : VorbisWaveReader, IAudioReader
     {

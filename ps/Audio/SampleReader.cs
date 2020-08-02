@@ -1,6 +1,6 @@
 ﻿using NAudio.Wave;
 
-namespace ps.SoundPlayer
+namespace ps.Audio
 {
     public class SampleReader : ISampleProvider
     {
