@@ -9,21 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\..\..\.nuget\packages\naudio.vorbis\1.2.0\contentFiles\any\net45\LICENSE" Link="LICENSE">
-      <Private>False</Private>
-      <NuGetPackageVersion>1.2.0</NuGetPackageVersion>
-      <NuGetItemType>None</NuGetItemType>
-      <NuGetPackageId>NAudio.Vorbis</NuGetPackageId>
-    </None>
-    <None Include="..\..\..\..\.nuget\packages\naudio.vorbis\1.2.0\contentFiles\any\net45\README.md" Link="README.md">
-      <Private>False</Private>
-      <NuGetPackageVersion>1.2.0</NuGetPackageVersion>
-      <NuGetItemType>None</NuGetItemType>
-      <NuGetPackageId>NAudio.Vorbis</NuGetPackageId>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.5" />
     <PackageReference Include="Emoji.Wpf" Version="0.0.19-experimental" />
     <PackageReference Include="Expression.Blend.Sdk" Version="1.0.2" />
