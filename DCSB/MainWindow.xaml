@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ps"
         xmlns:Views="clr-namespace:ps.Views.MainWindow"
         xmlns:Interactivity="clr-namespace:ps.Interactivity"
-        Title="Deathcounter and Soundboard"
+        Title="ps"
         MinHeight="150"
         MinWidth="380"
         Loaded="WindowLoaded"
