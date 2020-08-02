@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace DCSB.Input
+namespace ps.Input
 {
     public sealed class RawKeyboard
 	{

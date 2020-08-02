@@ -3,7 +3,7 @@ using System;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
-namespace DCSB.Models
+namespace ps.Models
 {
     public class Counter : ObservableObject, ICloneable
     {

@@ -4,7 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace DCSB.Input
+namespace ps.Input
 {
     static public class Win32
     {

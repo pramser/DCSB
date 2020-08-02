@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DCSB.Input
+namespace ps.Input
 {
     public class InputEventArg : EventArgs
     {

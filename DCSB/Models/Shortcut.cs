@@ -1,10 +1,10 @@
-﻿using DCSB.Utils;
+﻿using ps.Utils;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Xml.Serialization;
 
-namespace DCSB.Models
+namespace ps.Models
 {
     public class Shortcut : ObservableObject, IBindable
     {

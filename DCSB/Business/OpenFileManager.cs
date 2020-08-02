@@ -1,6 +1,6 @@
 ﻿using Microsoft.Win32;
 
-namespace DCSB.Business
+namespace ps.Business
 {
     public class OpenFileManager
     {

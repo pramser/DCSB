@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace DCSB.Views.SettingsWindow
+namespace ps.Views.SettingsWindow
 {
     /// <summary>
     /// Interaction logic for PresetView.xaml

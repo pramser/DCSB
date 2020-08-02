@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using System.Xml.Serialization;
 
-namespace DCSB.Models
+namespace ps.Models
 {
     public class OutputDevice : ObservableObject
     {

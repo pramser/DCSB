@@ -1,9 +1,9 @@
-﻿using DCSB.Utils;
+﻿using ps.Utils;
 using System;
 using System.Collections.Generic;
 using System.Timers;
 
-namespace DCSB.Input
+namespace ps.Input
 {
     public class KeyboardInput
     {

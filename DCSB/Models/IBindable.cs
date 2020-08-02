@@ -1,7 +1,7 @@
-﻿using DCSB.Utils;
+﻿using ps.Utils;
 using System.Collections.ObjectModel;
 
-namespace DCSB.Models
+namespace ps.Models
 {
     public interface IBindable
     {

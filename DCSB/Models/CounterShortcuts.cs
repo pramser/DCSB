@@ -1,7 +1,7 @@
-﻿using DCSB.Utils;
+﻿using ps.Utils;
 using GalaSoft.MvvmLight;
 
-namespace DCSB.Models
+namespace ps.Models
 {
     public class CounterShortcuts : ObservableObject
     {

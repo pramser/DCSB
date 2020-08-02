@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace DCSB.Input
+namespace ps.Input
 {
     [StructLayout(LayoutKind.Explicit)]
     public struct DeviceInfo

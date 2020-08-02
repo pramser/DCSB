@@ -1,12 +1,12 @@
-﻿<UserControl x:Class="DCSB.Views.SettingsWindow.PresetConfigurationView"
+﻿<UserControl x:Class="ps.Views.SettingsWindow.PresetConfigurationView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DCSB.Views.SettingsWindow"
-             xmlns:Controls="clr-namespace:DCSB.Controls"
-             xmlns:Interactivity="clr-namespace:DCSB.Interactivity"
-             xmlns:Converters="clr-namespace:DCSB.Converters"
+             xmlns:local="clr-namespace:ps.Views.SettingsWindow"
+             xmlns:Controls="clr-namespace:ps.Controls"
+             xmlns:Interactivity="clr-namespace:ps.Interactivity"
+             xmlns:Converters="clr-namespace:ps.Converters"
              mc:Ignorable="d" 
              d:DesignWidth="300">
 

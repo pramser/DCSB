@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace DCSB.Views.MainWindow
+namespace ps.Views.MainWindow
 {
     /// <summary>
     /// Interaction logic for SoundListView.xaml

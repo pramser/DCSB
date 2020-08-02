@@ -1,8 +1,8 @@
-﻿using DCSB.Utils;
+﻿using ps.Utils;
 using GalaSoft.MvvmLight;
 using System.Xml.Serialization;
 
-namespace DCSB.Models
+namespace ps.Models
 {
     public class ConfigurationModel : ObservableObject
     {

@@ -1,4 +1,4 @@
-﻿namespace DCSB.Utils
+﻿namespace ps.Utils
 {
     public enum VKey
     {

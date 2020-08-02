@@ -1,11 +1,11 @@
-﻿using DCSB.Models;
+﻿using ps.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace DCSB.ViewModels
+namespace ps.ViewModels
 {
     public class PresetViewModel : ObservableObject
     {

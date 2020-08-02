@@ -1,7 +1,7 @@
-﻿using DCSB.Business;
-using DCSB.Input;
-using DCSB.Models;
-using DCSB.Utils;
+﻿using ps.Business;
+using ps.Input;
+using ps.Models;
+using ps.Utils;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace DCSB.ViewModels
+namespace ps.ViewModels
 {
     public class ViewModel : ObservableObject
     {

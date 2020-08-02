@@ -1,9 +1,9 @@
-﻿using DCSB.ViewModels;
+﻿using ps.ViewModels;
 using System;
 using System.Windows;
 using System.Windows.Interop;
 
-namespace DCSB
+namespace ps
 {
     public partial class MainWindow : Window
     {

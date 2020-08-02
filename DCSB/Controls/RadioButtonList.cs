@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace DCSB.Controls
+namespace ps.Controls
 {
     public class RadioButtonList : ListBox
     {

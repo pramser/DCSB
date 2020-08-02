@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace DCSB
+namespace ps
 {
     /// <summary>
     /// Interaction logic for SoundWindow.xaml

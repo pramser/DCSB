@@ -1,4 +1,4 @@
-﻿using DCSB.Models;
+﻿using ps.Models;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Security.Principal;
 using System.Threading;
 using System.Xml.Serialization;
 
-namespace DCSB.Business
+namespace ps.Business
 {
     public class ConfigurationManager : IDisposable
     {

@@ -1,10 +1,10 @@
-﻿using DCSB.Models;
-using DCSB.SoundPlayer;
+﻿using ps.Models;
+using ps.SoundPlayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DCSB.Business
+namespace ps.Business
 {
     public class SoundManager
     {

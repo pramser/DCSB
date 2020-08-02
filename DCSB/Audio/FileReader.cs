@@ -1,6 +1,6 @@
 ﻿using NAudio.Wave;
 
-namespace DCSB.SoundPlayer
+namespace ps.SoundPlayer
 {
     internal class FileReader : AudioFileReader, IAudioReader
     {

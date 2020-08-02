@@ -1,10 +1,10 @@
-﻿using DCSB.Utils;
+﻿using ps.Utils;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace DCSB.Converters
+namespace ps.Converters
 {
     public class VKeysToStringConverter : IValueConverter
     {

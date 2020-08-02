@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
 
-namespace DCSB.Converters
+namespace ps.Converters
 {
     public class AreEqualConverter : IMultiValueConverter
     {

@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Shapes;
 
-namespace DCSB.Converters
+namespace ps.Converters
 {
     public class VolumeIconConverter : IValueConverter
     {

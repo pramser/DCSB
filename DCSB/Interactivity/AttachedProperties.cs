@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace DCSB.Interactivity
+namespace ps.Interactivity
 {
     public static class AttachedProperties
     {

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Interactivity;
 
-namespace DCSB.Interactivity
+namespace ps.Interactivity
 {
     public class OpenCloseWindowBehavior : Behavior<Window>
     {

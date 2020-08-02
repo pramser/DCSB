@@ -5,7 +5,7 @@
     <TargetFramework>net48</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>icon.ico</ApplicationIcon>
-    <StartupObject>DCSB.App</StartupObject>
+    <StartupObject>ps.App</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

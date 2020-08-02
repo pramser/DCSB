@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace DCSB.Converters
+namespace ps.Converters
 {
     public class StringFormatConverter : IMultiValueConverter
     {

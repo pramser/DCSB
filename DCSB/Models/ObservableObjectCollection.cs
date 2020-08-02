@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 
-namespace DCSB.Models
+namespace ps.Models
 {
     public class ObservableObjectCollection<T> : ObservableCollection<T> where T : INotifyPropertyChanged
     {

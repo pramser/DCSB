@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace DCSB.Interactivity
+namespace ps.Interactivity
 {
     public static class Commands
     {

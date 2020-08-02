@@ -1,6 +1,6 @@
 ﻿using Microsoft.Win32;
 
-namespace DCSB.Input
+namespace ps.Input
 {
     static internal class RegistryAccess
     {
