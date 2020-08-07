@@ -12,7 +12,7 @@ namespace ps.Converters
         {
             double? volume = value as double?;
             IList<Path> icons = parameter as IList<Path>;
-            
+
             if (volume.HasValue && icons != null)
             {
                 if (volume == 0)

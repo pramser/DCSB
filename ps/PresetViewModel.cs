@@ -1,6 +1,6 @@
-﻿using ps.Models;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using ps.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -11,23 +11,14 @@ namespace ps.ViewModels
     {
         public PresetViewModel(ApplicationStateModel applicationStateModel, ConfigurationModel configurationModel)
         {
-            _applicationStateModel = applicationStateModel;
-            _configurationModel = configurationModel;
+            ApplicationStateModel = applicationStateModel;
+            ConfigurationModel = configurationModel;
 
             _selectedSounds = new ObservableCollection<Sound>();
         }
 
-        private ApplicationStateModel _applicationStateModel;
-        public ApplicationStateModel ApplicationStateModel
-        {
-            get { return _applicationStateModel; }
-        }
-
-        private ConfigurationModel _configurationModel;
-        public ConfigurationModel ConfigurationModel
-        {
-            get { return _configurationModel; }
-        }
+        public ApplicationStateModel ApplicationStateModel { get; }
+        public ConfigurationModel ConfigurationModel { get; }
 
         private Preset _selectedPreset;
         public Preset SelectedPreset
@@ -58,7 +49,7 @@ namespace ps.ViewModels
         private void AddPreset()
         {
             Preset preset = new Preset() { Name = "New Preset" };
-            _configurationModel.PresetCollection.Add(preset);
+            ConfigurationModel.PresetCollection.Add(preset);
             SelectedPreset = preset;
         }
 
@@ -70,18 +61,18 @@ namespace ps.ViewModels
         {
             if (SelectedPreset != null)
             {
-                if (_configurationModel.PresetCollection.Count == 1)
+                if (ConfigurationModel.PresetCollection.Count == 1)
                 {
                     AddPreset();
-                    _configurationModel.PresetCollection.Remove(SelectedPreset);
+                    ConfigurationModel.PresetCollection.Remove(SelectedPreset);
                 }
                 else
                 {
-                    if (SelectedPreset == _configurationModel.SelectedPreset)
+                    if (SelectedPreset == ConfigurationModel.SelectedPreset)
                     {
-                        _configurationModel.SelectedPresetIndex = 0;
+                        ConfigurationModel.SelectedPresetIndex = 0;
                     }
-                    _configurationModel.PresetCollection.Remove(SelectedPreset);
+                    ConfigurationModel.PresetCollection.Remove(SelectedPreset);
                 }
             }
         }
@@ -95,7 +86,7 @@ namespace ps.ViewModels
             if (SelectedPreset != null)
             {
                 Preset preset = (Preset)SelectedPreset.Clone();
-                _configurationModel.PresetCollection.Add(preset);
+                ConfigurationModel.PresetCollection.Add(preset);
                 SelectedPreset = preset;
             }
         }
@@ -108,8 +99,8 @@ namespace ps.ViewModels
         {
             if (bindable != null)
             {
-                _applicationStateModel.ModifiedBindable = bindable;
-                _applicationStateModel.BindKeysOpened = true;
+                ApplicationStateModel.ModifiedBindable = bindable;
+                ApplicationStateModel.BindKeysOpened = true;
             }
         }
 
@@ -119,8 +110,8 @@ namespace ps.ViewModels
         }
         public void CancelBindKeys()
         {
-            _applicationStateModel.BindKeysOpened = false;
-            _applicationStateModel.ModifiedBindable = null;
+            ApplicationStateModel.BindKeysOpened = false;
+            ApplicationStateModel.ModifiedBindable = null;
         }
 
         public ICommand ClearKeysCommand
@@ -129,9 +120,9 @@ namespace ps.ViewModels
         }
         private void ClearKeys()
         {
-            _applicationStateModel.BindKeysOpened = false;
-            _applicationStateModel.ModifiedBindable.Keys.Clear();
-            _applicationStateModel.ModifiedBindable = null;
+            ApplicationStateModel.BindKeysOpened = false;
+            ApplicationStateModel.ModifiedBindable.Keys.Clear();
+            ApplicationStateModel.ModifiedBindable = null;
         }
 
         public ICommand AddSoundCommand
@@ -146,8 +137,8 @@ namespace ps.ViewModels
                 SelectedPreset.SoundCollection.Add(sound);
                 SelectedSounds.Clear();
                 SelectedSounds.Add(sound);
-                _applicationStateModel.ModifiedSound = sound;
-                _applicationStateModel.SoundOpened = true;
+                ApplicationStateModel.ModifiedSound = sound;
+                ApplicationStateModel.SoundOpened = true;
             }
         }
 
@@ -168,8 +159,8 @@ namespace ps.ViewModels
         {
             if (SelectedSounds.Count > 0)
             {
-                _applicationStateModel.ModifiedSound = SelectedSounds[0];
-                _applicationStateModel.SoundOpened = true;
+                ApplicationStateModel.ModifiedSound = SelectedSounds[0];
+                ApplicationStateModel.SoundOpened = true;
             }
         }
 

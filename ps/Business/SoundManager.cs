@@ -1,5 +1,5 @@
-﻿using ps.Models;
-using ps.Audio;
+﻿using ps.Audio;
+using ps.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace ps.Business
     {
         private AudioPlaybackEngine _primarySoundPlayer;
         private AudioPlaybackEngine _secondarySoundPlayer;
-        private Random _random;
+        private readonly Random _random;
 
         private float _volume = 1f;
         public float Volume

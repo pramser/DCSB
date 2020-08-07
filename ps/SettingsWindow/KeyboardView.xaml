@@ -2,8 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ps.Views.SettingsWindow"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:Converters="clr-namespace:ps.Converters"
              xmlns:Interactivity="clr-namespace:ps.Interactivity"
              mc:Ignorable="d" 
@@ -13,7 +12,7 @@
     <UserControl.Resources>
         <Converters:VKeysToStringConverter x:Key="vKeysToStringConverter" />
     </UserControl.Resources>
-    
+
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
 
@@ -29,7 +28,7 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    
+
                     <Label Grid.Row="0" Grid.Column="0" Width="{Binding ActualWidth, ElementName=label}">Pause:</Label>
                     <TextBox Grid.Row="0" Grid.Column="1" Margin="2" IsReadOnly="True" Cursor="Arrow" VerticalContentAlignment="Center"
                              Text="{Binding ConfigurationModel.SoundShortcuts.Pause.Keys, Converter={StaticResource vKeysToStringConverter}}"

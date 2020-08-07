@@ -10,7 +10,6 @@ namespace ps.Input
         public int Size;
         [FieldOffset(4)]
         public int Type;
-
         [FieldOffset(8)]
         public DeviceInfoMouse MouseInfo;
         [FieldOffset(8)]
@@ -70,13 +69,13 @@ namespace ps.Input
     {
         public Int32 dbcc_size;
         public BroadcastDeviceType BroadcastDeviceType;
-        #pragma warning disable 0169
+#pragma warning disable 0169
         Int32 dbcc_reserved;
-        #pragma warning restore 0169
+#pragma warning restore 0169
         public Guid dbcc_classguid;
-        #pragma warning disable 0649
+#pragma warning disable 0649
         public char dbcc_name;
-        #pragma warning restore 0649
+#pragma warning restore 0649
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -98,7 +97,7 @@ namespace ps.Input
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct  InputData
+    public struct InputData
     {
         public Rawinputheader header;           // 64 bit header size is 24  32 bit the header size is 16
         public RawData data;                    // Creating the rest in a struct allows the header size to align correctly for 32 or 64 bit
@@ -164,7 +163,7 @@ namespace ps.Input
 
         public override string ToString()
         {
-            return string.Format("Rawkeyboard\n Makecode: {0}\n Makecode(hex) : {0:X}\n Flags: {1}\n Reserved: {2}\n VKeyName: {3}\n Message: {4}\n ExtraInformation {5}\n", 
+            return string.Format("Rawkeyboard\n Makecode: {0}\n Makecode(hex) : {0:X}\n Flags: {1}\n Reserved: {2}\n VKeyName: {3}\n Message: {4}\n ExtraInformation {5}\n",
                                                 Makecode, Flags, Reserved, VKey, Message, ExtraInformation);
         }
     }

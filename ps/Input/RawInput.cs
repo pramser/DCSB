@@ -12,15 +12,15 @@ namespace ps.Input
         static readonly Guid DeviceInterfaceHid = new Guid("4D1E55B2-F16F-11CF-88CB-001111000030");
         private PreMessageFilter _filter;
 
-        public  event RawKeyboard.DeviceEventHandler KeyPressed
+        public event RawKeyboard.DeviceEventHandler KeyPressed
         {
             add { _keyboardDriver.KeyPressed += value; }
-            remove { _keyboardDriver.KeyPressed -= value;}
+            remove { _keyboardDriver.KeyPressed -= value; }
         }
 
         public int NumberOfKeyboards
         {
-            get { return _keyboardDriver.NumberOfKeyboards; } 
+            get { return _keyboardDriver.NumberOfKeyboards; }
         }
 
         public bool CaptureOnlyIfTopMostWindow
@@ -51,7 +51,7 @@ namespace ps.Input
 
         public RawInput(IntPtr parentHandle)
         {
-            AssignHandle(parentHandle); 
+            AssignHandle(parentHandle);
 
             _keyboardDriver = new RawKeyboard(parentHandle);
             _keyboardDriver.EnumerateDevices();
@@ -87,7 +87,7 @@ namespace ps.Input
             {
                 Debug.Print("Registration for device notifications Failed. Error: {0}", Marshal.GetLastWin32Error());
             }
-            
+
             return usbNotifyHandle;
         }
 
@@ -112,7 +112,7 @@ namespace ps.Input
 
             base.WndProc(ref message);
         }
-        
+
         private class PreMessageFilter : IMessageFilter
         {
             public bool PreFilterMessage(ref Message m)
@@ -122,11 +122,11 @@ namespace ps.Input
                     // Allow any non WM_INPUT message to pass through
                     return false;
                 }
-                
+
                 return _keyboardDriver.ProcessRawInput(m.LParam);
             }
         }
-        
+
         ~RawInput()
         {
             Win32.UnregisterDeviceNotification(_devNotifyHandle);

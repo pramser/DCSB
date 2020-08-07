@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ps.Views.SettingsWindow"
              xmlns:Controls="clr-namespace:ps.Controls"
-             xmlns:Interactivity="clr-namespace:ps.Interactivity"
              xmlns:Converters="clr-namespace:ps.Converters"
              mc:Ignorable="d" 
              d:DesignWidth="300">
@@ -13,7 +12,7 @@
     <UserControl.Resources>
         <Converters:VKeysToStringConverter x:Key="vKeysToStringConverter" />
     </UserControl.Resources>
-    
+
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <GroupBox Header="Presets">

@@ -7,9 +7,9 @@ namespace ps.Business
 {
     public class ShortcutManager
     {
-        private ApplicationStateModel _applicationStateModel;
-        private ConfigurationModel _configurationModel;
-        private SoundManager _soundManager;
+        private readonly ApplicationStateModel _applicationStateModel;
+        private readonly ConfigurationModel _configurationModel;
+        private readonly SoundManager _soundManager;
 
         public ShortcutManager(ApplicationStateModel applicationStateModel, ConfigurationModel configurationModel, SoundManager soundManager)
         {

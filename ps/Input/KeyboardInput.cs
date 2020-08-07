@@ -35,10 +35,11 @@ namespace ps.Input
         public KeyboardInput(IntPtr handle)
         {
             rawInput = new RawInput(handle);
-            
+
             rawInput.KeyPressed += OnKeyPressed;
 
-            shiftNumpadTimer.Elapsed += (x, y) => {
+            shiftNumpadTimer.Elapsed += (x, y) =>
+            {
                 if (shiftNumpadCorrection)
                 {
                     shiftNumpadCorrection = false;

@@ -2,7 +2,7 @@
 {
     public enum VKey
     {
-        // Losely based on http://www.pinvoke.net/default.aspx/Enums/VK.html
+        // Loosely based on http://www.pinvoke.net/default.aspx/Enums/VK.html
 
         NUL = 0x00,
         LBUTTON = 0x01,     // Left mouse button

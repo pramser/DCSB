@@ -3,16 +3,13 @@ using System.Windows.Forms;
 
 namespace ps.Input
 {
-    internal enum VirtualKeys : short
-    {
-        
-    }
+    internal enum VirtualKeys : short { }
 
     public static class KeyMapper
     {
         // I prefer to have control over the key mapping
         // This mapping could be loading from file to allow mapping changes without a recompile
-        public  static string GetKeyName(int value)
+        public static string GetKeyName(int value)
         {
             switch (value)
             {

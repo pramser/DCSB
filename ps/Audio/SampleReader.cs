@@ -7,7 +7,7 @@ namespace ps.Audio
         public bool IsDisposed { get; protected set; }
 
         private readonly IAudioReader _reader;
-        private bool _loop;
+        private readonly bool _loop;
 
         public WaveFormat WaveFormat { get; private set; }
 

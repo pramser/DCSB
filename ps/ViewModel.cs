@@ -1,8 +1,8 @@
-﻿using ps.Business;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using ps.Business;
 using ps.Input;
 using ps.Models;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -32,7 +32,7 @@ namespace ps.ViewModels
             ApplicationStateModel = new ApplicationStateModel();
             _configurationManager = new ConfigurationManager();
             ConfigurationModel = _configurationManager.Load();
-            
+
             if (ConfigurationModel.PresetCollection.Count == 0)
             {
                 ConfigurationModel.PresetCollection.Add(new Preset() { Name = "New Preset" });
@@ -180,7 +180,7 @@ namespace ps.ViewModels
             {
                 return (new WindowsPrincipal(WindowsIdentity.GetCurrent()))
                     .IsInRole(WindowsBuiltInRole.Administrator) ?
-                    Visibility.Collapsed : 
+                    Visibility.Collapsed :
                     Visibility.Visible;
             }
         }
@@ -248,7 +248,7 @@ namespace ps.ViewModels
             var result = MessageBox.Show("DCSB is not running as an administrator.\n" +
                 "This is fine as long as keybinds work when other app is focused.\n" +
                 "If you focus other app and keybins stop working, you'll need to run DCSB as admin.\n\n" +
-                "Restart DCSB and run it as admin now?", 
+                "Restart DCSB and run it as admin now?",
                 "Not Admin",
                 MessageBoxButton.YesNo);
 

@@ -11,7 +11,7 @@ namespace ps.Audio
         private readonly WaveOutEvent _outputDevice;
         private readonly MixingSampleProvider _mixer;
 
-        private int _volumePowBase = 100;
+        private readonly int _volumePowBase = 100;
 
         public float Volume
         {

@@ -14,7 +14,7 @@ namespace ps.Input
         public const int RimTypekeyboard = 1;
         public const int RimTypeHid = 2;
     }
-    
+
     internal enum RawInputDeviceInfo : uint
     {
         RIDI_DEVICENAME = 0x20000007,
